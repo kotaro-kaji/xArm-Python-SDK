@@ -70,7 +70,8 @@ print_status('after_admittance_params')
 arm.set_ft_sensor_enable(1)
 print_status('after_ft_enable')
 # will overwrite previous sensor zero and payload configuration
-# arm.set_ft_sensor_zero() # remove this if zero_offset and payload already identified & compensated!
+arm.set_ft_sensor_zero() # remove this if zero_offset and payload already identified & compensated!
+print_status('after_ft_zero')
 time.sleep(0.2) # wait for writing zero operation to take effect, do not remove
 
 # move robot in admittance control application
