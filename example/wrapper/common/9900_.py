@@ -45,19 +45,12 @@ arm.set_state(0)
 time.sleep(0.1)
 
 
-def progress(item):
-    print('progress: {}'.format(item['progress']))
-
-
-arm.register_iden_progress_changed_callback(progress)
 start_time = time.monotonic()
 arm.set_ft_sensor_enable(1)
-code, result = arm.iden_ft_sensor_load_offset()
-end_time = time.monotonic()
-print('code={}, result={}, cost_time={}'.format(code, result, end_time - start_time))
 
-arm.release_iden_progress_changed_callback(progress)
-arm.set_ft_sensor_mode(0)
+print("結果")
+print(arm.set_ft_sensor_mode(0))
+print("結果")
 arm.set_ft_sensor_enable(0)
 arm.disconnect()
 
