@@ -44,14 +44,24 @@ arm.set_mode(0)
 arm.set_state(0)
 time.sleep(0.1)
 
+def print_status(tag):
+    err_warn = arm.get_err_warn_code()
+    state = arm.get_state()
+    print('[{}] err_warn={}, state={}'.format(tag, err_warn, state))
+
+print_status('after_init')
 
 start_time = time.monotonic()
 arm.set_ft_sensor_enable(1)
+print_status('after_ft_enable')
 
 print("結果")
+print_status('before_ft_mode_off')
 print(arm.set_ft_sensor_mode(0))
 print("結果")
+print_status('after_ft_mode_off')
 arm.set_ft_sensor_enable(0)
+print_status('after_ft_disable')
 arm.disconnect()
 
 # arm.set_ft_sensor_enable(1)
