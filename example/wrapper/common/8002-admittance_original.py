@@ -64,6 +64,9 @@ arm.set_ft_sensor_enable(1)
 # arm.set_ft_sensor_zero() # remove this if zero_offset and payload already identified & compensated!
 time.sleep(0.2) # wait for writing zero operation to take effect, do not remove
 
+arm.clean_error()
+arm.set_mode(0)
+arm.set_state(0)
 # move robot in admittance control application
 print(arm.get_ft_sensor_mode())
 arm.set_ft_sensor_mode(1)
