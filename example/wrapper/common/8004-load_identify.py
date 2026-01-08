@@ -55,6 +55,8 @@ arm.set_ft_sensor_enable(1)
 code, result = arm.iden_ft_sensor_load_offset()
 end_time = time.monotonic()
 print('code={}, result={}, cost_time={}'.format(code, result, end_time - start_time))
+if code == 0:
+    arm.set_ft_sensor_load_offset(result)
 arm.release_iden_progress_changed_callback(progress)
 arm.set_ft_sensor_mode(0)
 arm.set_ft_sensor_enable(0)
