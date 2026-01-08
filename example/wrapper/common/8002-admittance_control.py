@@ -46,8 +46,8 @@ time.sleep(0.1)
 
 def print_status(tag):
     err_warn = arm.get_err_warn_code()
-    state = arm.get_state()
-    print('[{}] err_warn={}, state={}'.format(tag, err_warn, state))
+    code, state = arm.get_state()
+    print('[{}] err_warn={}, state=({}, {})'.format(tag, err_warn, code, state))
 
 print_status('after_init')
 
