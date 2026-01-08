@@ -65,6 +65,7 @@ arm.set_ft_sensor_enable(1)
 time.sleep(0.2) # wait for writing zero operation to take effect, do not remove
 
 # move robot in admittance control application
+print(arm.get_ft_sensor_mode())
 arm.set_ft_sensor_mode(1)
 # will start after set_state(0)
 arm.set_state(0)

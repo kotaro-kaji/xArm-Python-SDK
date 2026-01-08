@@ -413,8 +413,10 @@ class FtSensor(Base):
     @xarm_is_connected(_type='get')
     def set_ft_sensor_mode(self, mode, **kwargs):
         mode = kwargs.get('app_code', mode)
+        print(f"{mode} だよ")
         ret = self.arm_cmd.ft_sensor_app_set(mode)
-        self.log_api_info('API -> set_ft_sensor_mode -> code={}, app_code={}'.format(ret[0], mode), code=ret[0])
+        
+        self.log_api_info('-> set_ft_sensor_mode -> code={}, app_code={}'.format(ret[0], mode), code=ret[0])
         return self._check_code(ret[0])
 
     @xarm_is_connected(_type='get')

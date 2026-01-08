@@ -57,7 +57,7 @@ print_status('after_ft_enable')
 
 print("結果")
 print_status('before_ft_mode_off')
-print(arm.set_ft_sensor_mode(0))
+#print(arm.set_ft_sensor_mode(0))
 print("結果")
 print_status('after_ft_mode_off')
 arm.set_ft_sensor_enable(0)
