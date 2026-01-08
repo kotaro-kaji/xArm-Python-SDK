@@ -63,13 +63,24 @@ c_axis = [0,0,1,0,0,0] # set z axis as compliant axis
 ref_frame = 0         # 0 : base , 1 : tool
 
 arm.set_ft_sensor_admittance_parameters([M, M, M, J, J, J], [K_pos, K_pos, K_pos, K_ori, K_ori, K_ori], [0]*6) # B(damping) is reserved, give zeros
+
+time.sleep(3)
+print_status('after_admittance_params1')
 arm.set_ft_sensor_admittance_parameters(ref_frame, c_axis)
-print_status('after_admittance_params')
+time.sleep(3)
+print_status('after_admittance_params2')
 
 # enable ft sensor communication
 arm.set_ft_sensor_enable(1)
 print_status('after_ft_enable')
 # will overwrite previous sensor zero and payload configuration
+
+
+arm.clean_error()
+arm.set_mode(0)
+arm.set_state(0)
+
+
 arm.set_ft_sensor_zero() # remove this if zero_offset and payload already identified & compensated!
 print_status('after_ft_zero')
 time.sleep(0.2) # wait for writing zero operation to take effect, do not remove
