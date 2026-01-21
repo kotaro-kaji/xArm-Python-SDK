@@ -45,10 +45,17 @@ arm.set_state(0)
 time.sleep(0.1)
 
 def print_status(tag):
+    
     err_warn = arm.get_err_warn_code()
-    state = arm.get_state()
-    print('[{}] err_warn={}, state={}'.format(tag, err_warn, state))
+    code, state = arm.get_state()
+        
+    print('[{}] err_warn={}, state=({}, {})'.format(tag, err_warn, code, state))
 
+def wait():
+    while state == 5:
+        code, state = arm.get_state()
+        time.sleep(1)
+    
 print_status('after_init')
 
 # set tool admittance parameters:
@@ -64,10 +71,10 @@ ref_frame = 0         # 0 : base , 1 : tool
 
 arm.set_ft_sensor_admittance_parameters([M, M, M, J, J, J], [K_pos, K_pos, K_pos, K_ori, K_ori, K_ori], [0]*6) # B(damping) is reserved, give zeros
 
-time.sleep(3)
+time.sleep(0.3)
 print_status('after_admittance_params1')
 arm.set_ft_sensor_admittance_parameters(ref_frame, c_axis)
-time.sleep(3)
+time.sleep(0.3)
 print_status('after_admittance_params2')
 
 # enable ft sensor communication
@@ -80,13 +87,13 @@ arm.clean_error()
 arm.set_mode(0)
 arm.set_state(0)
 
-
-arm.set_ft_sensor_zero() # remove this if zero_offset and payload already identified & compensated!
-print_status('after_ft_zero')
-time.sleep(0.2) # wait for writing zero operation to take effect, do not remove
+print_status("after_cleaning")
+#arm.set_ft_sensor_zero() # remove this if zero_offset and payload already identified & compensated!
+#print_status('after_ft_zero')
+#time.sleep(0.2) # wait for writing zero operation to take effect, do not remove
 
 # move robot in admittance control application
-arm.set_ft_sensor_mode(1)
+arm.set_ft_sensor_mode(0)
 print_status('after_ft_mode_on')
 # will start after set_state(0)
 arm.set_state(0)
